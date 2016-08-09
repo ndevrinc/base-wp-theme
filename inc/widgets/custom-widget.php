@@ -1,6 +1,10 @@
 <?php
 namespace InternetRetailer\Inc\Widgets;
 
+/**
+ * Class CustomWidget
+ * @package InternetRetailer\Inc\Widgets
+ */
 class CustomWidget extends \WP_Widget {
 	/**
 	 * Register widget with WordPress.

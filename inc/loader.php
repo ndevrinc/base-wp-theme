@@ -1,17 +1,33 @@
 <?php
 namespace InternetRetailer\Inc;
 
+/**
+ * Class Loader
+ * @package InternetRetailer\Inc
+ */
 class Loader {
+	/**
+	 * @var \InternetRetailer\Inc\Loader
+	 */
 	private static $instance;
 
+	/**
+	 * Project text domain
+	 */
+	const TEXT_DOMAIN = 'internet-retailer';
+
+	/**
+	 * Loader constructor.
+	 */
 	public function __construct() {
 		$this->register_autoloader();
 		$this->init();
-		$this->setup_actions();
-		$this->setup_filters();
-		$this->setup_content_model();
 	}
 
+	/**
+	 * Static method for the object instance
+	 * @return Loader
+	 */
 	public static function get_instance() {
 
 		if ( ! isset( self::$instance ) ) {
@@ -22,6 +38,9 @@ class Loader {
 
 	}
 
+	/**
+	 * Registering the new autoloader
+	 */
 	protected function register_autoloader() {
 		/**
 		 * Registering PSR-4 compliant namespaces
@@ -64,8 +83,13 @@ class Loader {
 		} );
 	}
 
+	/**
+	 * Initializes the object
+	 */
 	public function init() {
-		add_action( 'wp_enqueue_scripts', [ $this, 'init_scripts' ] );
+		$this->setup_actions();
+		$this->setup_filters();
+		$this->setup_content_model();
 	}
 
 	/**
@@ -78,12 +102,22 @@ class Loader {
 		wp_enqueue_script( 'custom-js', get_template_directory_uri() . '/js/main.js', array( 'jquery' ), '', true );
 	}
 
+	/**
+	 * This method is used to setup any WordPress actions
+	 */
 	public function setup_actions() {
+		add_action( 'wp_enqueue_scripts', [ $this, 'init_scripts' ] );
 	}
 
+	/**
+	 * This method is used to setup any WordPress filters
+	 */
 	public function setup_filters() {
 	}
 
+	/**
+	 * Fetches content model and intializes its content
+	 */
 	public function setup_content_model() {
 		$content_model = new ContentModel();
 

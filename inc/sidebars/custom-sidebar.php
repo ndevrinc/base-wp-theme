@@ -2,15 +2,24 @@
 
 namespace InternetRetailer\Inc\Sidebars;
 
+/**
+ * Class CustomSidebar
+ * @package InternetRetailer\Inc\Sidebars
+ */
 class CustomSidebar {
 
+	/**
+	 * CustomSidebar constructor.
+	 */
 	public function __construct() {
+		/**
+		 * Attaching the callback to the widget_init action hook
+		 */
 		add_action( 'widgets_init', [ $this, 'sidebar_init' ] );
 	}
 
 	/**
 	 * Register our sidebars and widgetized areas.
-	 *
 	 */
 	public function sidebar_init() {
 
