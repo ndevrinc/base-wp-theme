@@ -2,35 +2,54 @@
 
 namespace InternetRetailer\Inc\PostTypes;
 
+/**
+ * Class Company
+ * @package InternetRetailer\Inc\PostTypes
+ */
 class Company {
-	protected $text_domain = 'internet-retailer';
 
+	/**
+	 * Company constructor.
+	 */
 	public function __construct() {
+		/**
+		 * Attaching the custom post type callback to the init action hook
+		 */
 		add_action( 'init', [ $this, 'init_post_type' ] );
+
+		/**
+		 * The purpose of this is to have properties/vars accessible from within templates without fetching the data there.
+		 * The concept is to add a method in the custom post type declaration class to add such var.
+		 * I am currently using the set_query_var( 'custom_var', 'ndevr' ); inside the action hook wp .
+		 * Since it runs after the query but before the template.
+		 */
 		add_action( 'wp', [ $this, 'prepare_data' ] );
 	}
 
+	/**
+	 * Init the custom post type
+	 */
 	public function init_post_type() {
 		$labels = [
-			'name'               => _x( 'Companies', 'post type general name', $this->text_domain ),
-			'singular_name'      => _x( 'Company', 'post type singular name', $this->text_domain ),
-			'menu_name'          => _x( 'Companies', 'admin menu', $this->text_domain ),
-			'name_admin_bar'     => _x( 'Company', 'add new on admin bar', $this->text_domain ),
-			'add_new'            => _x( 'Add New', 'company', $this->text_domain ),
-			'add_new_item'       => __( 'Add New Company', $this->text_domain ),
-			'new_item'           => __( 'New Company', $this->text_domain ),
-			'edit_item'          => __( 'Edit Company', $this->text_domain ),
-			'view_item'          => __( 'View Company', $this->text_domain ),
-			'all_items'          => __( 'All Companies', $this->text_domain ),
-			'search_items'       => __( 'Search Companies', $this->text_domain ),
-			'parent_item_colon'  => __( 'Parent Companies:', $this->text_domain ),
-			'not_found'          => __( 'No companies found.', $this->text_domain ),
-			'not_found_in_trash' => __( 'No companies found in Trash.', $this->text_domain )
+			'name'               => _x( 'Companies', 'post type general name', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
+			'singular_name'      => _x( 'Company', 'post type singular name', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
+			'menu_name'          => _x( 'Companies', 'admin menu', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
+			'name_admin_bar'     => _x( 'Company', 'add new on admin bar', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
+			'add_new'            => _x( 'Add New', 'company', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
+			'add_new_item'       => __( 'Add New Company', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
+			'new_item'           => __( 'New Company', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
+			'edit_item'          => __( 'Edit Company', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
+			'view_item'          => __( 'View Company', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
+			'all_items'          => __( 'All Companies', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
+			'search_items'       => __( 'Search Companies', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
+			'parent_item_colon'  => __( 'Parent Companies:', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
+			'not_found'          => __( 'No companies found.', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
+			'not_found_in_trash' => __( 'No companies found in Trash.', \InternetRetailer\Inc\Loader::TEXT_DOMAIN )
 		];
 
 		$args = [
 			'labels'          => $labels,
-			'description'     => __( 'Description.', $this->text_domain ),
+			'description'     => __( 'Description.', \InternetRetailer\Inc\Loader::TEXT_DOMAIN ),
 			'public'          => true,
 			'rewrite'         => [ 'slug' => 'company' ],
 			'capability_type' => 'post',
@@ -43,13 +62,12 @@ class Company {
 		register_post_type( 'company', $args );
 	}
 
-	public function add_query_vars( $qvars ) {
-		$qvars[] = 'custom_var';
-		return $qvars;
-	}
-
+	/**
+	 * Callback for the hook action wp.
+	 * You can add your custom vars in here like so : set_query_var( 'custom_var', 'andrea' );
+	 * This var can be retrieved in the theme with the get_query_var( 'custom_var' );
+	 * @param $wp
+	 */
 	public function prepare_data( $wp ) {
-		//You can add your custom vars in here like so : set_query_var( 'custom_var', 'andrea' );
-		//This var can be retrieved in the theme with the get_query_var( 'custom_var' );
 	}
 }
