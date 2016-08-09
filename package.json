@@ -1,0 +1,28 @@
+{
+  "name": "CHANGE-ME",
+  "version": "1.0.0",
+  "description": "CHANGE-ME",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ndevrinc/base-wp-theme"
+  },
+  "author": "Ndevr",
+  "license": "MIT",
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-sass": "^1.2.0",
+    "jshint": "^2.9.2"
+  }
+}
